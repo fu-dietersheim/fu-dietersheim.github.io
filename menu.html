@@ -1,0 +1,13 @@
+<body BGCOLOR=#ababab>
+	<table>
+		<tr><td height=210><img height=200 src="graphics/earth.gif"></td></tr>
+		<tr><td><img src="graphics/ueberFUD.gif" onmouseover="this.src='graphics/ueberFUD-pressed.gif';" onmouseout="this.src='graphics/ueberFUD.gif';"></td></tr>
+		<tr><td><img src="graphics/Fakultaeten.gif" onmouseover="this.src='graphics/Fakultaeten-pressed.gif';" onmouseout="this.src='graphics/Fakultaeten.gif';"></td></tr>
+		<tr><td><img src="graphics/Kontakt.gif" onmouseover="this.src='graphics/Kontakt-pressed.gif';" onmouseout="this.src='graphics/Kontakt.gif';"></td></tr>
+		<tr><td align=center>You are the <b><blink id="visitorNo">1536</blink></b> visitor.</td></tr>
+	</table>
+<script>
+	i = Math.random() * 10000;
+	i = Math.round(i);
+	window.document.getElementById("visitorNo").innerHTML = i;
+</script>
