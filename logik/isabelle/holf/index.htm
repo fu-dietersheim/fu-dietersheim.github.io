@@ -1,0 +1,56 @@
+
+<body BGCOLOR=#cc6>
+<font face="sans-serif">
+
+<style type="text/css">
+.keyword {
+  font-weight:bold;
+}
+
+.comment {
+  color:#262;
+}
+
+.antiquot {
+  color:#828;
+}
+
+.inner {
+  color:#228;
+}
+</style>
+
+<h1>Isabelle/HOLF</h1>
+
+<p><em>Isabelle/HOLF</em> is an extension to the <a href="http://www.cl.cam.ac.uk/research/hvg/Isabelle/"><em>Isabelle/HOL</em></a> system that augments Higher Order Logic with an additional axiom from <a href="http://www.eleves.ens.fr/home/amarilli/falso/"><em>Falso</em></a>, a novel axiom system developed at Estatis Inc. The <em>Isabelle/HOLF</em> extension is developed at the <em>Theorem Proving Group</em> of the <em>FU Dietersheim</em> and the first release is planned for 1 April 2013.</p>
+
+<p>For more information, read the corresponding <a href="../../../presse.html#falso">press release</a> A prototype version of Isabelle/HOLF that integrates seamlessly with any recent version of Isabelle can be downloaded <a href="HOLF.tar.gz">here</a>.</p>
+
+<p>As a demonstration of the capabilities of HOLF, consider the following proof of the Fermat-Wiles Theorem, which illustrates how succinctly proofs can be expressed in HOLF, compared to conventional systems such as HOL or ZF:</p>
+
+<blockquote><p><pre>
+<span class="keyword">theory</span> Fermat
+<span class="keyword">imports</span> Main HOLF
+<span class="keyword">begin</span>
+
+<span class="keyword">text</span> <span class="comment">{*
+  The Fermat-Wiles theorem: If <span class="antiquot">@{term "n>2"}</span>, no 
+  <span class="antiquot">@{term "n"}</span>-th power of a positive integer can be the 
+  sum of the <span class="antiquot">@{term "n"}</span>-th powers of two positive integers.
+  
+  Note how the length and complexity of this proof compares 
+  to Wiles' original proof.
+  
+  "Cuius rei demonstrationem mirabilem sane deteximus
+   Quodque marginis exiguitas caperet."
+*}</span>
+<span class="keyword">lemma</span> fermat:
+  <span class="keyword">fixes</span> n :: nat and a :: nat
+  <span class="keyword">assumes</span> <span class="inner">"n > 2" "a > 0" "b > 0" "c > 0"</span>
+  <span class="keyword">shows</span> <span class="inner">"a^n + b^n &ne; c^n"</span>
+<span class="keyword">using</span> assms
+<span class="keyword">apply</span> exfalso
+<span class="keyword">done</span>
+
+<span class="keyword">end</span>
+</pre></p></blockquote>
