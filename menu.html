@@ -1,8 +1,42 @@
+<head>
+<style type="text/css">
+ul.mittelmaesigenavigationsliste {
+    list-style-type:none;
+    margin:0;
+    padding:0;
+}
+ul.mittelmaesigenavigationsliste ul {
+    display:none;
+}
+ul.mittelmaesigenavigationsliste:hover ul {
+    display:block;
+}
+</style>
+</head>
 <body BGCOLOR=#ababab>
 	<table>
 		<tr><td height=210><a href="FUD.html" target="_top"><img height=200 src="graphics/earth.gif"></a></td></tr>
-		<tr><td><a href="ueber.html" target="Hauptseite"><img src="graphics/ueberFUD.gif" onmouseover="this.src='graphics/ueberFUD-pressed.gif';" onmouseout="this.src='graphics/ueberFUD.gif';"></a></td></tr>
-		<tr><td><a href="fakultaeten.html" target="Hauptseite"><img src="graphics/Fakultaeten.gif" onmouseover="this.src='graphics/Fakultaeten-pressed.gif';" onmouseout="this.src='graphics/Fakultaeten.gif';"></img></td></tr>
+		<tr><td>
+		    <ul class=mittelmaesigenavigationsliste>
+		        <li><a href="ueber.html" target="Hauptseite"><img src="graphics/ueberFUD.gif" onmouseover="this.src='graphics/ueberFUD-pressed.gif';" onmouseout="this.src='graphics/ueberFUD.gif';"></a></li>
+		        <ul>
+		            <li><a href="ueber.html" target="Hauptseite">&Uuml;ber FUD</a></li>
+		            <li><a href="presse.html" target="Hauptseite">Presse</a></li>
+		            <br><!-- intentionally left blank -->
+		        </ul>
+		    </ul>
+		</td></tr>
+		<tr><td>
+		    <ul class=mittelmaesigenavigationsliste>
+		        <li><a href="fakultaeten.html" target="Hauptseite"><img src="graphics/Fakultaeten.gif" onmouseover="this.src='graphics/Fakultaeten-pressed.gif';" onmouseout="this.src='graphics/Fakultaeten.gif';"></img></li>
+		        <ul>
+		            <li><a href="fakultaeten.html" target="Hauptseite">Fakult&auml;ten</a></li>
+		            <li><a href="inf.html" target="Hauptseite">Fakult&auml;t f&uuml;r Informatik</a></li>
+		            <li><a href="institute.html" target="Hauptseite">An-Institute</a></li>
+		            <br><!-- intentionally left blank -->
+		        </ul>
+		     </ul>
+		</td></tr>
 		<tr><td><a href="kontakt.html" target="Hauptseite"><img src="graphics/Kontakt.gif" onmouseover="this.src='graphics/Kontakt-pressed.gif';" onmouseout="this.src='graphics/Kontakt.gif';"></a></td></tr>
 		<tr><td align=center>You are the <b><blink id="visitorNo">1536</blink></b> visitor.</td></tr>
 	</table>
