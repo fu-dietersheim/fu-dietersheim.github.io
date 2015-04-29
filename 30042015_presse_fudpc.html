@@ -1,0 +1,159 @@
+<head>
+<style>
+pre {
+    margin-top: 10px;
+    padding-top: 0px;
+}
+code {
+    background-color: black;
+    color: green;
+    padding:1px;
+    font-weight: bold;
+}
+h4 {
+    margin-bottom: 5px;
+} 
+hr {
+    border:solid #ababab 1px;
+    margin:40px 20px;
+}
+</style>
+</head>
+<body BGCOLOR=#0099FF>
+
+<h1>Announcing the FUD PC</h1>
+
+<p>30 April 2015
+
+<p>
+The FUD is proud to announce the FUD PC.
+The FUD PC will be the default PC installation for all future FUD workstations.
+
+<p>
+The following software will be available on the FUD PC:
+<ul>
+	<li>python 2.7.9
+</ul>
+
+<hr>
+
+<p>
+Are you annoyed by your userland?
+Are you annoyed by the systemd vs. sysvinit debate?
+Are you annoyed by all the pachting and updating of your userland?
+Are you annoyed by the shared libarary hell and the dll hell?
+
+<p>
+The FUD presents a novel solution: <em>Userland-Less Linux</em> (abbreviated <em>UseLess Linux</em>).
+
+<p><img src="graphics/useless-linux.png">
+
+<hr>
+
+<p><strong>Q:</strong> Which software does <em>UseLess Linux</em> support?<br>
+<strong>A:</strong> Here is a complete list: [python 2.7.9]
+
+<p><strong>Q:</strong> What about <code>mv</code>, <code>cd</code>, <code>rm</code>, <code>cat</code>, <code>ls</code>?<br>
+<strong>A:</strong> These legacy programs to manage your userland are no longer necessary. Only python 2.7.9 is supported.
+
+<p><strong>Q:</strong> Can I run <em>UseLess Linux</em> on my machine?<br>
+<strong>A:</strong> Yes, we provide installation instructions below. 
+
+<hr>
+
+<h3>Building and Deploying <em>UseLess Linux</em></h3>
+Here is a guide to build and deploy Userland-Less Linux.
+Compiling on your own is also the preferred way the FUD system administration expects you to obtain the system.
+
+<h4>Step 1: Compiling a Kernel</h4>
+Compile your favorite Linux kernel.
+Procedure obvious.
+We use <code>/boot/fudlinuz</code>
+
+<h4>Step 2: Build the Userland</h4>
+We compile the userland. The <code>./configure</code> options for python are self-explanatory.
+<pre><code>$ wget -q --no-check-certificate -O- https://www.python.org/ftp/python/2.7.9/Python-2.7.9.tar.xz | tar xJv
+$ cd Python-2.7.9/
+$ LINKFORSHARED="-static" SO=".penis" CCSHARED="-static" LDSHARED='$(CC) -static' ./configure --disable-ipv6 --with-suffix=.fud --with-doc-strings --disable-shared LDFLAGS="-static -static-libgcc" CPPFLAGS="-static"
+$ sha1sum python.fud
+8d193d3a8a445ab3fea81ef5e4d1790a5bce56de  python.fud
+</code></pre>
+
+You should get the same sha1sum.
+Make sure to use the corresponding tool chain and set your system clock appropriately.
+
+<h4>Step 3: Test the Userland</h4>
+<pre><code>$ ./python.fud 
+Python 2.7.9 (default, Apr 29 2015, 02:33:16) 
+[GCC 4.8.2] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> print "Welcome to the FUD PC"
+Welcome to the FUD PC
+>>> def f(x):
+... 	return 4+x
+... 
+>>> f(8)
+12
+>>> 2**3
+8
+>>> import math
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ImportError: No module named math
+>>> 3*math.pi
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'math' is not defined
+>>> import socket
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/diekmann/Downloads/Python-2.7.9/Lib/socket.py", line 47, in <module>
+    import _socket
+ImportError: No module named _socket
+</code></pre>
+
+Works like charm.
+
+
+<h4>Step 4: Deploy</h4>
+
+The system can now be deployed to the target machine.
+
+<pre><code>$ sudo loadkeys de #important!
+$ cd Python-2.7.9/
+$ mv python.fud init
+$ cd ..
+$ cd Python-2.7.9/
+$ find . | cpio --quiet --dereference -o -H newc | gzip -9 > ~/fudinitrd
+$ cd ..
+$ sudo cp -i fudinitrd /boot/
+$ sudo vim /etc/grub.d/40_custom
+</code></pre>
+
+Add the following.
+We assume you are running the kernel fudlinuz.
+
+<pre><code>#!/bin/sh
+exec tail -n +3 $0
+# This file provides an easy way to add custom menu entries.  Simply type the
+# menu entries you want to add after this comment.  Be careful not to change
+# the 'exec tail' line above.
+
+menuentry "Useless Linux" {
+	linux	/boot/fudlinuz
+	initrd	/boot/fudinitrd
+}
+</code></pre>
+
+<pre><code>$ sudo update-grub
+</code></pre>
+
+You can now remove all deprecated parts of your legacy system. <code>$ ls -R /</code> should only report: <code>/boot/fudlinuz  /boot/fudinitrd</code>.
+
+
+<h4>Step 5: Enjoy</h4>
+Boot into your freshly installed <em>UseLess Linux</em> and enjoy!
+
+<p>
+<hr>
+
