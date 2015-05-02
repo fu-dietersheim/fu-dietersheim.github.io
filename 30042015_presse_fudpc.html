@@ -75,6 +75,7 @@ We compile the userland. The <code>./configure</code> options for python are sel
 <pre><code>$ wget -q --no-check-certificate -O- https://www.python.org/ftp/python/2.7.9/Python-2.7.9.tar.xz | tar xJv
 $ cd Python-2.7.9/
 $ LINKFORSHARED="-static" SO=".penis" CCSHARED="-static" LDSHARED='$(CC) -static' ./configure --disable-ipv6 --with-suffix=.fud --with-doc-strings --disable-shared LDFLAGS="-static -static-libgcc" CPPFLAGS="-static"
+$ make
 $ sha1sum python.fud
 8d193d3a8a445ab3fea81ef5e4d1790a5bce56de  python.fud
 </code></pre>
